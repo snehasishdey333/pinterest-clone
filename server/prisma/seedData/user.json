@@ -1,0 +1,34 @@
+[
+    {
+      
+        "name":"Snehasish Dey",
+        "username":"snehasishdey",
+        "email":"snehasishdey100@gmail.com",
+        "password":"$2a$10$3",
+        "image":"https://cdn.pixabay.com/photo/2016/11/29/03/52/man-1867175_1280.jpg"
+    },
+    {
+       
+        "name":"John Doe",
+        "username":"johndoe",
+        "email":"johndoe@gmail.com",
+        "password":"$2a$10$3",
+        "image":"https://cdn.pixabay.com/photo/2024/12/16/16/28/hot-air-balloons-9271140_1280.jpg"
+    },
+    {
+   
+        "name":"John Doe",
+        "username":"johndoe1",
+        "email":"johndoe2@gmail.com",
+        "password":"$2a$10$3",
+        "image":"https://cdn.pixabay.com/photo/2023/10/25/15/23/insect-8340649_1280.jpg"
+    },
+    {
+        
+        "name":"Jane Doe",
+        "username":"janedoe",
+        "email":"janedoe@gmail.com",
+        "password":"$2a$10$3",
+        "image":"https://cdn.pixabay.com/photo/2023/10/27/10/28/woman-8344944_1280.jpg"
+    }
+]
