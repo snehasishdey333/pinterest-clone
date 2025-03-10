@@ -12,6 +12,7 @@ declare global {
 
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies.token
+    console.log(token)
     if (!token) {
         throw new CustomError(401, "You are not authenticated!")
     }
