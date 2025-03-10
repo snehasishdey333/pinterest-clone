@@ -85,7 +85,7 @@ const AuthPage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-md rounded-lg p-6 w-96">
-        <img src="public/assets/asset 154.svg" alt="Pinterest" className="w-40 mx-auto mb-6" />
+        <img src="/assets/asset 154.svg" alt="Pinterest" className="w-40 mx-auto mb-6" />
         <h2 className="text-2xl font-semibold text-center mb-4">
           {isSignup ? "Sign Up for Pinterest" : "Welcome back to Pinterest"}
         </h2>

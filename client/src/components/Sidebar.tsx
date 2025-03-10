@@ -6,7 +6,7 @@ const Sidebar = () => {
     <div className="w-14 md:w-16 flex flex-col items-center py-4 border-r sticky h-screen top-0 border-gray-100">
         <Link to="/" className="mb-6">
           <div className="w-8 h-8 flex items-center justify-center rounded-full ">
-            <img src="public/assets/asset 158.svg" alt="" className="w-6 h-6 rounded-full" />
+            <img src="/assets/asset 158.svg" alt="" className="w-6 h-6 rounded-full" />
           </div>
         </Link>
 

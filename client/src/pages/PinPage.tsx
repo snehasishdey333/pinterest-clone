@@ -51,7 +51,7 @@ const PinPage = () => {
           <div>
             <div className="w-full flex justify-between items-center">
               <div onClick={()=>navigate(`/user/${data?.userId}`)} className="cursor-pointer flex items-center gap-2">
-              {data?.user?.image ? <img src="/public/assets/asset 0.jpeg" alt="" className="w-8 h-8 rounded-full" />
+              {data?.user?.image ? <img src="/assets/asset 0.jpeg" alt="" className="w-8 h-8 rounded-full" />
        : <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center font-bold text-sm">
        {data?.user?.name.charAt(0)}
      </div>}

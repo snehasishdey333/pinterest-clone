@@ -35,7 +35,7 @@ const Navbar = () => {
        {currentUser?.name.charAt(0)}
      </div>}
         <div className="flex items-center justify-center h-7 w-7 hover:bg-gray-200 rounded-full">
-        <img src="/public/assets/asset 155.svg" alt="" className=" w-4 h-4 rounded-full" />
+        <img src="/assets/asset 155.svg" alt="" className=" w-4 h-4 rounded-full" />
         </div>
         
         {menuOpen && (<Menu/>)}
