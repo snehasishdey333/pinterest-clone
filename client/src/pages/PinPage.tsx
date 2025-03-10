@@ -1,7 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useQuery} from '@tanstack/react-query';
 import {  useNavigate, useParams } from 'react-router';
-import { fetchPin, postComment } from '../utils/apis';
+import { fetchPin } from '../utils/apis';
 import CommentForm from '../components/CommentForm';
 
 
