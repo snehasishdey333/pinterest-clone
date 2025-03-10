@@ -15,6 +15,7 @@ import commentRoutes from './routes/comments'
 import { errorHandler } from './middlewares/error'
 import verifyToken from './middlewares/verifyToken'
 
+
 // CONFIGURATIONS
 dotenv.config()
 const app=express()
