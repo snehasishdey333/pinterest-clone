@@ -8,6 +8,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 
+
 router.get('/', getPinsController);
 
 router.get('/:pinId',verifyToken, getPinController);
