@@ -41,7 +41,9 @@ export const registerController = async (req: Request, res: Response, next: Next
       
           
           res
-            .cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" })
+            .cookie("token", token, { httpOnly: true,
+              secure: true,    
+              sameSite: 'none' })
             .status(200)
             .json(userInfo);
     }
@@ -93,7 +95,9 @@ export const loginController = async (req: Request, res: Response, next: NextFun
 
     
     res
-      .cookie("token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" })
+      .cookie("token", token, { httpOnly: true,
+        secure: true,    
+        sameSite: 'none' })
       .status(200)
       .json(userInfo);
   } catch (err) {
