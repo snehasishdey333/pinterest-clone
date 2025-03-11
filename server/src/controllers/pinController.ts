@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 
 export const getPinsController=async(req: Request, res: Response, next: NextFunction)=>{
    try{
-    console.log("hi")
+    // console.log("hi")
       const { search } = req.query; 
 
       let pins;
