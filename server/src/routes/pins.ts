@@ -16,5 +16,6 @@ router.get('/:pinId',verifyToken, getPinController);
 router.put('/:pinId', updatePinController);
 
 router.post('/',verifyToken,upload.single("file") ,createPinController);
+// router.post('/',upload.single("file") ,createPinController);
 
 export default router;

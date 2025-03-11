@@ -86,6 +86,10 @@ export const createPinController=async(req: Request, res: Response, next: NextFu
 
     const s3Client = new S3Client({
       region: process.env.AWS_REGION,
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!
+      }
     });
     const uploadResult = await new Upload({
       client: s3Client,
