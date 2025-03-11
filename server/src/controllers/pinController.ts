@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response, NextFunction } from "express"
 import { CustomError } from "../middlewares/error";
 import { Upload } from "@aws-sdk/lib-storage";
-import { S3Client } from "@aws-sdk/client-s3";
+import { ObjectCannedACL, S3Client } from "@aws-sdk/client-s3";
 
 const prisma = new PrismaClient();
 
@@ -67,55 +67,106 @@ export const getPinController = async (req: Request, res: Response, next: NextFu
  };
 
 export const createPinController=async(req: Request, res: Response, next: NextFunction)=>{
-    try{
-      const file = req.file as Express.Multer.File;
-      console.log(file)
-      const {
-        title,description,userId,link
-      } = req.body;
+  //   try{
+  //     const file = req.file as Express.Multer.File;
+  //     console.log(file)
+  //     const {
+  //       title,description,userId,link
+  //     } = req.body;
       
-      console.log(req.body)
+  //     console.log(req.body)
+  //   const uploadParams = {
+  //     Bucket: process.env.S3_BUCKET_NAME!,
+  //     Key: `pins/${Date.now()}-${file.originalname}`,
+  //     Body: file.buffer,
+  //     ContentType: file.mimetype,
+  //   };
+
+  //   console.log(uploadParams)
+
+  //   const s3Client = new S3Client({
+  //     region: process.env.AWS_REGION,
+  //     // credentials: {
+  //     //   accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+  //     //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!
+  //     // }
+  //   });
+  //   const uploadResult = await new Upload({
+  //     client: s3Client,
+  //     params: uploadParams,
+  //   }).done();
+
+   
+   
+  //   const imageUrl = uploadResult.Location;
+  // console.log(imageUrl)
+  
+  //   const pin = await prisma.pin.create({
+  //     data: {
+  //       title,
+  //       description,
+  //       userId,
+  //       link:link || "",
+  //       image: imageUrl as string,
+  //     },
+  //   });
+
+  //   console.log(pin)
+
+  //   // Return the newly created pin
+  //   res.status(201).json(pin);
+  //   }
+  try {
+    const file = req.file as Express.Multer.File;
+    console.log(file);
+
+    const { title, description, userId, link } = req.body;
+    console.log(req.body);
+
+    // ✅ Step 1: Sanitize file name to avoid spaces, colons, etc.
+    const sanitizedFileName = `${Date.now()}-${file.originalname.replace(/\s+/g, '-').replace(/:/g, '-')}`;
+
+    // ✅ Step 2: Prepare S3 upload parameters
     const uploadParams = {
       Bucket: process.env.S3_BUCKET_NAME!,
-      Key: `pins/${Date.now()}-${file.originalname}`,
+      Key: `pins/${sanitizedFileName}`,
       Body: file.buffer,
       ContentType: file.mimetype,
+      ACL: 'public-read' as ObjectCannedACL
     };
 
-    console.log(uploadParams)
-
+    // ✅ Step 3: Upload to S3
     const s3Client = new S3Client({
       region: process.env.AWS_REGION,
-      // credentials: {
-      //   accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-      //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!
-      // }
+      credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!
+      }
     });
+
     const uploadResult = await new Upload({
       client: s3Client,
       params: uploadParams,
     }).done();
 
-   
-   
+    console.log("Uploaded Image URL:", uploadResult.Location);
+
+    // ✅ Step 4: Save Pin to Database
     const imageUrl = uploadResult.Location;
-  console.log(imageUrl)
-  
     const pin = await prisma.pin.create({
       data: {
         title,
         description,
         userId,
-        link:link || "",
+        link: link || "",
         image: imageUrl as string,
       },
     });
 
-    console.log(pin)
-
-    // Return the newly created pin
+    console.log(pin);
     res.status(201).json(pin);
-    }
+
+  }
     catch(error){
       console.log(error)
       next(error)
