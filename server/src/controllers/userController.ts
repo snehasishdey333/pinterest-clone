@@ -8,7 +8,6 @@ export const getUserController=async(req: Request, res: Response, next: NextFunc
     try {
         const { userId } = req.params; 
     
-        
         const pin = await prisma.user.findUnique({
           where: {
             id: userId, 
