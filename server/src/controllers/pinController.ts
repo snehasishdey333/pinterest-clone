@@ -69,12 +69,12 @@ export const getPinController = async (req: Request, res: Response, next: NextFu
 export const createPinController=async(req: Request, res: Response, next: NextFunction)=>{
     try{
       const file = req.file as Express.Multer.File;
-      // console.log(file)
+      console.log(file)
       const {
         title,description,userId,link
       } = req.body;
       
-      // console.log(req.body)
+      console.log(req.body)
     const uploadParams = {
       Bucket: process.env.S3_BUCKET_NAME!,
       Key: `pins/${Date.now()}-${file.originalname}`,
@@ -82,7 +82,7 @@ export const createPinController=async(req: Request, res: Response, next: NextFu
       ContentType: file.mimetype,
     };
 
-    // console.log(uploadParams)
+    console.log(uploadParams)
 
     const s3Client = new S3Client({
       region: process.env.AWS_REGION,
@@ -95,7 +95,7 @@ export const createPinController=async(req: Request, res: Response, next: NextFu
    
    
     const imageUrl = uploadResult.Location;
-
+  console.log(imageUrl)
   
     const pin = await prisma.pin.create({
       data: {
@@ -106,6 +106,8 @@ export const createPinController=async(req: Request, res: Response, next: NextFu
         image: imageUrl as string,
       },
     });
+
+    console.log(pin)
 
     // Return the newly created pin
     res.status(201).json(pin);
